@@ -88,7 +88,9 @@ function displayCurrentColorPalette() {
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
     // console.log(typeof currentColorPalette.colors[i].hexCode);
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
-        <div class="color-box" id="${currentColorPalette.colors[i].id}" style="background-color: ${currentColorPalette.colors[i].hexCode}"></div>
+        <div class="color-box" id="${currentColorPalette.colors[i].id}" style="background-color: ${currentColorPalette.colors[i].hexCode}">
+        <img class ="image"src='assets/${currentColorPalette.colors[i].status}.png'>
+        </div>
         <div class="current-color-palette-text">${currentColorPalette.colors[i].hexCode}</div>
       </div>`;
   }
