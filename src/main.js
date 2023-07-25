@@ -1,5 +1,14 @@
 // ===== GLOBAL VARIABLES =====
-var currentColorPalette = [];
+// var currentColorPalette = [];
+
+var currentColorPalette = [
+  { hexCode: "#489732", status: "locked", id: 1690287923557 },
+  { hexCode: "#9DA885", status: "locked", id: 1690287923557 },
+  { hexCode: "#B47DC6", status: "unlocked", id: 1690287923557 },
+  { hexCode: "#851116", status: "unlocked", id: 1690287923557 },
+  { hexCode: "#CEEEDB", status: "locked", id: 1690287923557 },
+  { hexCode: "#0BA2B8", status: "locked", id: 1690287923557 },
+];
 
 // ===== EVENT LISTENERS =====
 window.addEventListener("load", function () {
@@ -37,6 +46,14 @@ function setCurrentColors(currentColorPalette, savedColorPalette = []) {
     if (currentColorPalette.length === 0) {
       for (let i = 0; i <= 5; i++) {
         currentColorPalette.push(createColor());
+      }
+    } else {
+      for (let i = 0; i < currentColorPalette.length; i++) {
+        console.log(currentColorPalette[i]);
+        if (currentColorPalette[i].status === "unlocked") {
+          var newColor = createColor();
+          currentColorPalette.splice(i, 1, newColor);
+        }
       }
     }
   }
