@@ -35,6 +35,7 @@ newPaletteButton.addEventListener("click", function (event) {
 
 colorPaletteContainer.addEventListener("click", function (event) {
   lockAndUnlock(event);
+  displayCurrentColorPalette();
 });
 
 // ===== FUNCTIONS =====
