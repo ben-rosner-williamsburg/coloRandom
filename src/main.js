@@ -9,6 +9,7 @@ var currentColorPalette = {
   colors: [],
   id: Date.now(),
 };
+// TO DO - THINK ABOUT FUNCTION INSTEAD
 
 // var currentColorPalette = {
 //   colors: [
