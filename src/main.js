@@ -5,7 +5,10 @@ var colorPaletteContainer = document.querySelector(".palette-container");
 var testButton = document.querySelector("button");
 
 // ===== GLOBAL VARIABLES =====
-var currentColorPalette = [];
+var currentColorPalette = {
+  colors: [],
+  id: Date.now(),
+};
 
 // var currentColorPalette = [
 //   { hexCode: "#489732", status: "unlocked", id: 1690287923557 },
@@ -51,20 +54,23 @@ function createColor() {
   return color;
 }
 
-function setCurrentColors(currentColorPalette, savedColorPalette = []) {
-  if (savedColorPalette.length) {
+function setCurrentColors(
+  currentColorPalette,
+  savedColorPalette = { colors: [], id: Date.now() }
+) {
+  if (savedColorPalette.colors.length) {
     currentColorPalette = savedColorPalette;
   } else {
-    if (currentColorPalette.length === 0) {
+    if (currentColorPalette.colors.length === 0) {
       for (let i = 0; i <= 4; i++) {
-        currentColorPalette.push(createColor());
+        currentColorPalette.colors.push(createColor());
       }
     } else {
-      for (let i = 0; i < currentColorPalette.length; i++) {
+      for (let i = 0; i < currentColorPalette.colors.length; i++) {
         // console.log(currentColorPalette[i]);
-        if (currentColorPalette[i].status === "unlocked") {
+        if (currentColorPalette.colors[i].status === "unlocked") {
           var newColor = createColor();
-          currentColorPalette.splice(i, 1, newColor);
+          currentColorPalette.colors.splice(i, 1, newColor);
         }
       }
     }
@@ -75,12 +81,11 @@ function setCurrentColors(currentColorPalette, savedColorPalette = []) {
 
 function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
-  console.log(currentColorPalette);
-  for (let i = 0; i < currentColorPalette.length; i++) {
-    console.log(typeof currentColorPalette[i].hexCode);
+  for (let i = 0; i < currentColorPalette.colors.length; i++) {
+    console.log(typeof currentColorPalette.colors[i].hexCode);
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
-        <div class="color-box" style="background-color: ${currentColorPalette[i].hexCode}"></div>
-        <div>${currentColorPalette[i].hexCode}</div>
+        <div class="color-box" style="background-color: ${currentColorPalette.colors[i].hexCode}"></div>
+        <div class="current-color-palette-text">${currentColorPalette.colors[i].hexCode}</div>
       </div>`;
   }
 }
