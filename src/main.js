@@ -2,7 +2,7 @@
 
 var colorPaletteContainer = document.querySelector(".palette-container");
 
-var testButton = document.querySelector("button");
+var newPaletteButton = document.querySelector(".new-palette-button");
 
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
@@ -10,13 +10,16 @@ var currentColorPalette = {
   id: Date.now(),
 };
 
-// var currentColorPalette = [
-//   { hexCode: "#489732", status: "unlocked", id: 1690287923557 },
-//   { hexCode: "#9DA885", status: "unlocked", id: 1690287923557 },
-//   { hexCode: "#B47DC6", status: "locked", id: 1690287923557 },
-//   { hexCode: "#851116", status: "locked", id: 1690287923557 },
-//   { hexCode: "#CEEEDB", status: "locked", id: 1690287923557 },
-// ];
+// var currentColorPalette = {
+//   colors: [
+//     { hexCode: "#EA9999", status: "locked", id: 1690287923557 },
+//     { hexCode: "#FACB9C", status: "locked", id: 1690287923557 },
+//     { hexCode: "#FFE59A", status: "locked", id: 1690287923557 },
+//     { hexCode: "#B6D7A8", status: "locked", id: 1690287923557 },
+//     { hexCode: "#A4C4CA", status: "locked", id: 1690287923557 },
+//   ],
+//   id: Date.now(),
+// };
 
 // ===== EVENT LISTENERS =====
 window.addEventListener("load", function () {
@@ -24,7 +27,7 @@ window.addEventListener("load", function () {
   displayCurrentColorPalette();
 });
 
-testButton.addEventListener("click", function (event) {
+newPaletteButton.addEventListener("click", function (event) {
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 });
@@ -49,7 +52,7 @@ function createColor() {
   var color = {
     hexCode: colorCode,
     status: "unlocked",
-    id: Date.now(),
+    id: colorCode,
   };
   return color;
 }
@@ -82,9 +85,9 @@ function setCurrentColors(
 function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
-    console.log(typeof currentColorPalette.colors[i].hexCode);
+    // console.log(typeof currentColorPalette.colors[i].hexCode);
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
-        <div class="color-box" style="background-color: ${currentColorPalette.colors[i].hexCode}"></div>
+        <div class="color-box" id="${currentColorPalette.colors[i].id}" style="background-color: ${currentColorPalette.colors[i].hexCode}"></div>
         <div class="current-color-palette-text">${currentColorPalette.colors[i].hexCode}</div>
       </div>`;
   }
