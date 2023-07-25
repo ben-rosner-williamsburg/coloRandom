@@ -1,3 +1,9 @@
+// ===== ONLOAD QUERY SELECTORS =====
+
+var colorPaletteContainer = document.querySelector(".color-box-container");
+
+var testButton = document.querySelector("button");
+
 // ===== GLOBAL VARIABLES =====
 // var currentColorPalette = [];
 
@@ -14,6 +20,11 @@ var currentColorPalette = [
 window.addEventListener("load", function () {
   setCurrentColors(currentColorPalette);
 });
+
+testButton.addEventListener("click", function (event) {
+  displayCurrentColorPalette(event);
+});
+// ===== FUNCTIONS =====
 
 function randomHex() {
   var randIndex = Math.floor(Math.random() * hexCharacters.length);
@@ -59,4 +70,9 @@ function setCurrentColors(currentColorPalette, savedColorPalette = []) {
   }
   //   console.log(currentColorPalette);
   return currentColorPalette;
+}
+
+function displayCurrentColorPalette() {
+  for (let i = 0; i < currentColorPalette.length; i++)
+    console.log(colorPaletteContainer.innerHTML);
 }
