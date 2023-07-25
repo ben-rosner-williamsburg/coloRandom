@@ -32,6 +32,11 @@ newPaletteButton.addEventListener("click", function (event) {
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 });
+
+colorPaletteContainer.addEventListener("click", function (event) {
+  lockAndUnlock(event);
+});
+
 // ===== FUNCTIONS =====
 
 function randomHex() {
@@ -79,7 +84,7 @@ function setCurrentColors(
       }
     }
   }
-  console.log(currentColorPalette);
+  //   console.log(currentColorPalette);
   return currentColorPalette;
 }
 
@@ -88,8 +93,30 @@ function displayCurrentColorPalette() {
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
     // console.log(typeof currentColorPalette.colors[i].hexCode);
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
-        <div class="color-box" id="${currentColorPalette.colors[i].id}" style="background-color: ${currentColorPalette.colors[i].hexCode}"></div>
+        <div class="color-box" id="${currentColorPalette.colors[i].id}" style="background-color: ${currentColorPalette.colors[i].hexCode}">
+        <img id="${currentColorPalette.colors[i].id}"class="image"src='assets/${currentColorPalette.colors[i].status}.png'> </div>
         <div class="current-color-palette-text">${currentColorPalette.colors[i].hexCode}</div>
       </div>`;
+  }
+}
+
+function lockAndUnlock(event) {
+  var lockEmoji = event.target.id;
+  //   console.log(lockEmoji);
+  // iterate through the array go to the data model and change the status of the specific one
+  var index;
+  for (let i = 0; i < currentColorPalette.colors.length; i++) {
+    if (currentColorPalette.colors[i].id === lockEmoji) {
+      //   console.log(i);
+      index = i;
+    }
+  }
+  //   console.log(currentColorPalette.colors[index].status);
+  if (currentColorPalette.colors[index].status === "locked") {
+    currentColorPalette.colors[index].status = "unlocked";
+    // console.log("getting here");
+  } else {
+    currentColorPalette.colors[index].status = "locked";
+    // console.log("getting here2");
   }
 }
