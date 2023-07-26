@@ -15,10 +15,7 @@ var currentColorPalette = {
   id: Date.now(),
 };
 
-var savedColorPalette = {
-  colors: [],
-  id: Date.now
-}
+var savedColorPalette = []
 // TO DO - THINK ABOUT FUNCTION INSTEAD
 
 // var currentColorPalette = {
@@ -51,6 +48,8 @@ colorPaletteContainer.addEventListener("click", function (event) {
 savePaletteButton.addEventListener("click", function() {
   savePalette(currentColorPalette);
   displaySavedPalette(savedColorPalette, savedColorsContainer);
+  setCurrentColors(currentColorPalette);
+  displayCurrentColorPalette();
 })
 
 // ===== FUNCTIONS =====
@@ -81,11 +80,11 @@ function createColor() {
 
 function setCurrentColors(
   currentColorPalette,
-  savedColorPalette = { colors: [], id: Date.now() }
+  // savedColorPalette = { colors: [], id: Date.now() }
 ) {
-  if (savedColorPalette.colors.length) {
-    currentColorPalette = savedColorPalette;
-  } else {
+  // if (savedColorPalette.colors.length) {
+  //   currentColorPalette = savedColorPalette;
+  // } else {
     if (currentColorPalette.colors.length === 0) {
       for (let i = 0; i <= 4; i++) {
         currentColorPalette.colors.push(createColor());
@@ -99,10 +98,11 @@ function setCurrentColors(
         }
       }
     }
+    return currentColorPalette;
   }
   //   console.log(currentColorPalette);
-  return currentColorPalette;
-}
+  
+// }
 
 function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
@@ -138,18 +138,22 @@ function lockAndUnlock(event) {
 }
 
 function savePalette(palette) {
-  savedColorPalette.colors.push(palette)
+  savedColorPalette.push(palette)
+  console.log(savedColorPalette, palette);
   return savedColorPalette;
 }
 
 
-function displaySavedPalette(savedPalette, savedColorsContainer){
+function displaySavedPalette(savedColorPalette, savedColorsContainer){
   savedColorsContainer.innerHTML = ""
-  savedColorsContainer.innerHTML = `<div class = "layer"></div>`
-   for (var i = 0; i < savedPalette.colors.length; i++){
+   for (var i = 0; i < savedColorPalette.length; i++){
+    console.log(savedColorPalette)
    savedColorsContainer.innerHTML += `<div class="layer"> 
-   <div class="saved-color-box" style="background-color: ${savedPalette.colors[0].colors[i].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[3].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[4].hexCode}"></div>
     </div>`;
-    }
-    console.log(savedPalette.colors)
+  }
 }

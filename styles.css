@@ -129,61 +129,7 @@
   margin-top: 25px;
 }
 
-.box-1 {
- background-color: #4A7C4F;
-}
-
-.box-2 {
-background-color: #D982A6;
-}
-
-.box-3 {
-  background-color: #739C8F;
-}
-
-.box-4 {
-  background-color: #BC613F;
-}
-
-.box-5 {
-  background-color: #F1A563;
-}
-
-.box-6 {
- background-color: #8299B3;
-}
-
-.box-7 {
-  background-color: #5E478A;
-}
-
-.box-8 {
-  background-color: #C94E59;
-}
-
-.box-9 {
-  background-color: #E0BB24;
-
-}
-
-.box-10 {
-  background-color: #E0BB24;
-
-}
-.box-11 {
-  background-color: #A8D175;
-}
-
-.box-12 {
-  background-color: #6E3C52;
-}
-
-.box-13 {
-  background-color: #F0C89F;
-}
-.box-14 {
-  background-color: #4F85A9;
-}
-.box-15 {
-  background-color: #9A5E2A;
+.saved-palettes-message {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
 }
