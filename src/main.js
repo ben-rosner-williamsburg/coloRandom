@@ -2,7 +2,7 @@
 
 var colorPaletteContainer = document.querySelector(".palette-container");
 
-var newPaletteButton = document.querySelector(".new-palette-button");
+var newPaletteButton = document.querySelector(".palette-button");
 
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
