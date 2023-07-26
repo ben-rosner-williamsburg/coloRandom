@@ -6,8 +6,9 @@ var newPaletteButton = document.querySelector(".palette-button");
 
 var savePaletteButton = document.querySelector(".save-palette");
 
-var savedColorBoxes = document.querySelector(".saved-color-boxes-container")
-
+var savedColorsContainer = document.querySelector(".saved-colors-container");
+console.log(savedColorsContainer);
+console.log(savePaletteButton);
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
@@ -49,6 +50,7 @@ colorPaletteContainer.addEventListener("click", function (event) {
 
 savePaletteButton.addEventListener("click", function() {
   savePalette(currentColorPalette);
+  displaySavedPalette(savedColorPalette, savedColorsContainer);
 })
 
 // ===== FUNCTIONS =====
@@ -137,5 +139,17 @@ function lockAndUnlock(event) {
 
 function savePalette(palette) {
   savedColorPalette.colors.push(palette)
-  console.log(savedColorPalette);
+  return savedColorPalette;
+}
+
+
+function displaySavedPalette(savedPalette, savedColorsContainer){
+  savedColorsContainer.innerHTML = ""
+  savedColorsContainer.innerHTML = `<div class = "layer"></div>`
+   for (var i = 0; i < savedPalette.colors.length; i++){
+   savedColorsContainer.innerHTML += `<div class="layer"> 
+   <div class="saved-color-box" style="background-color: ${savedPalette.colors[0].colors[i].hexCode}"></div>
+    </div>`;
+    }
+    console.log(savedPalette.colors)
 }
