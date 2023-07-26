@@ -4,11 +4,20 @@ var colorPaletteContainer = document.querySelector(".palette-container");
 
 var newPaletteButton = document.querySelector(".palette-button");
 
+var savePaletteButton = document.querySelector(".save-palette");
+
+var savedColorBoxes = document.querySelector(".saved-color-boxes-container")
+
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
   id: Date.now(),
 };
+
+var savedColorPalette = {
+  colors: [],
+  id: Date.now
+}
 // TO DO - THINK ABOUT FUNCTION INSTEAD
 
 // var currentColorPalette = {
@@ -28,7 +37,7 @@ window.addEventListener("load", function () {
   displayCurrentColorPalette();
 });
 
-newPaletteButton.addEventListener("click", function (event) {
+newPaletteButton.addEventListener("click", function () {
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 });
@@ -37,6 +46,10 @@ colorPaletteContainer.addEventListener("click", function (event) {
   lockAndUnlock(event);
   displayCurrentColorPalette();
 });
+
+savePaletteButton.addEventListener("click", function() {
+  savePalette(currentColorPalette);
+})
 
 // ===== FUNCTIONS =====
 
@@ -120,4 +133,9 @@ function lockAndUnlock(event) {
     currentColorPalette.colors[index].status = "locked";
     // console.log("getting here2");
   }
+}
+
+function savePalette(palette) {
+  savedColorPalette.colors.push(palette)
+  console.log(savedColorPalette);
 }
