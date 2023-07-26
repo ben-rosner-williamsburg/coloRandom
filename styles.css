@@ -1,12 +1,18 @@
 * {
   background-color: #E7F1F1;
+
 }
 
 .full-page {
   display: flex;
+  overflow: hidden;
+}
+
+.main-container {
+  margin-left: 20px;
+  display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
 }
 
 .title-container {
@@ -80,4 +86,11 @@
   height: 40px;
   background-color: rgb(0, 0, 0, 0);
   margin: 5px;
+}
+
+.saved-palettes-container {
+  
+  border-left: 5px solid black;
+  width: 420px;
+  margin-left: 28px;
 }
