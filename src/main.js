@@ -156,7 +156,7 @@ function savePalette(palette) {
 function displaySavedPalette(savedColorPalette, savedColorsContainer) {
   savedColorsContainer.innerHTML = ""
   for (var i = 0; i < savedColorPalette.length; i++) {
-    savedColorsContainer.innerHTML += `<div class="layer"> 
+    savedColorsContainer.innerHTML += `<div class="layer"> <img class="delete-x"src='assets/delete.png'> </div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
