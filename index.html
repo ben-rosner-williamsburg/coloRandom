@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@1,700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
   <title>Colorandom</title>
 </head>
-
 <body class="full-page">
   <main class="main-container">
   <div class="title-container">
@@ -20,39 +18,17 @@
   </main>
   <section class="btn-container">
     <button class="palette-button">New Palette</button>
-    <button class="palette-button">Save Palettes</button>
+    <button class="palette-button save-palette">Save Palettes</button>
   </section>
-  <script type="text/javascript" src="src/main.js"></script>
-  <script type="text/javascript" src="src/data.js"></script>
   </main>
   <aside class="saved-palettes-container">
     <h2 class="saved-palettes-title">Saved Palettes</h2>
-    <section class="saved-color-boxes-container">
-      <div class="layer-one">
-        <div class="saved-color-box box-1"></div>
-        <div class="saved-color-box box-2"></div>
-        <div class="saved-color-box box-3"></div>
-        <div class="saved-color-box box-4"></div>
-        <div class="saved-color-box box-5"></div>
-      </div>
-      <div class="layer-two">
-        <div class="saved-color-box box-6"></div>
-        <div class="saved-color-box box-7"></div>
-        <div class="saved-color-box box-8"></div>
-        <div class="saved-color-box box-9"></div>
-        <div class="saved-color-box box-10"></div>
-      </div>
-      <div class="layer-two">
-        <div class="saved-color-box box-11"></div>
-        <div class="saved-color-box box-12"></div>
-        <div class="saved-color-box box-13"></div>
-        <div class="saved-color-box box-14"></div>
-        <div class="saved-color-box box-15"></div>
-      </div>
-      </div>
-     
-    </section>
+    <div class="saved-colors-container">
+      <p class="saved-palettes-message">No saved palettes yet!</p>
+    </div>
+    </div>
   </aside>
+  <script type="text/javascript" src="src/main.js"></script>
+  <script type="text/javascript" src="src/data.js"></script>
 </body>
-
 </html>

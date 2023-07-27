@@ -4,11 +4,18 @@ var colorPaletteContainer = document.querySelector(".palette-container");
 
 var newPaletteButton = document.querySelector(".palette-button");
 
+var savePaletteButton = document.querySelector(".save-palette");
+
+var savedColorsContainer = document.querySelector(".saved-colors-container");
+console.log(savedColorsContainer);
+console.log(savePaletteButton);
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
   id: Date.now(),
 };
+
+var savedColorPalette = []
 // TO DO - THINK ABOUT FUNCTION INSTEAD
 
 // var currentColorPalette = {
@@ -28,7 +35,7 @@ window.addEventListener("load", function () {
   displayCurrentColorPalette();
 });
 
-newPaletteButton.addEventListener("click", function (event) {
+newPaletteButton.addEventListener("click", function () {
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 });
@@ -37,6 +44,13 @@ colorPaletteContainer.addEventListener("click", function (event) {
   lockAndUnlock(event);
   displayCurrentColorPalette();
 });
+
+savePaletteButton.addEventListener("click", function () {
+  savePalette(currentColorPalette);
+  displaySavedPalette(savedColorPalette, savedColorsContainer);
+  setCurrentColors(currentColorPalette);
+  displayCurrentColorPalette();
+})
 
 // ===== FUNCTIONS =====
 
@@ -66,28 +80,29 @@ function createColor() {
 
 function setCurrentColors(
   currentColorPalette,
-  savedColorPalette = { colors: [], id: Date.now() }
+  // savedColorPalette = { colors: [], id: Date.now() }
 ) {
-  if (savedColorPalette.colors.length) {
-    currentColorPalette = savedColorPalette;
+  // if (savedColorPalette.colors.length) {
+  //   currentColorPalette = savedColorPalette;
+  // } else {
+  if (currentColorPalette.colors.length === 0) {
+    for (let i = 0; i <= 4; i++) {
+      currentColorPalette.colors.push(createColor());
+    }
   } else {
-    if (currentColorPalette.colors.length === 0) {
-      for (let i = 0; i <= 4; i++) {
-        currentColorPalette.colors.push(createColor());
-      }
-    } else {
-      for (let i = 0; i < currentColorPalette.colors.length; i++) {
-        // console.log(currentColorPalette[i]);
-        if (currentColorPalette.colors[i].status === "unlocked") {
-          var newColor = createColor();
-          currentColorPalette.colors.splice(i, 1, newColor);
-        }
+    for (let i = 0; i < currentColorPalette.colors.length; i++) {
+      // console.log(currentColorPalette[i]);
+      if (currentColorPalette.colors[i].status === "unlocked") {
+        var newColor = createColor();
+        currentColorPalette.colors.splice(i, 1, newColor);
       }
     }
   }
-  //   console.log(currentColorPalette);
   return currentColorPalette;
 }
+//   console.log(currentColorPalette);
+
+// }
 
 function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
@@ -119,5 +134,34 @@ function lockAndUnlock(event) {
   } else {
     currentColorPalette.colors[index].status = "locked";
     // console.log("getting here2");
+  }
+}
+
+function savePalette(palette) {
+  var savedPalette = { colors: [], id: palette.id };
+  for (let i = 0; i < palette.colors.length; i++) {
+    var color = {
+      hexCode: palette.colors[i].hexCode,
+      status: palette.colors[i].status,
+      id: palette.colors[i].id,
+    };
+    savedPalette.colors.push(color);
+  }
+  savedColorPalette.push(savedPalette);
+  console.log(savedColorPalette);
+  return savedColorPalette;
+}
+
+
+function displaySavedPalette(savedColorPalette, savedColorsContainer) {
+  savedColorsContainer.innerHTML = ""
+  for (var i = 0; i < savedColorPalette.length; i++) {
+    savedColorsContainer.innerHTML += `<div class="layer"> 
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[3].hexCode}"></div>
+   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[4].hexCode}"></div>
+    </div>`;
   }
 }
