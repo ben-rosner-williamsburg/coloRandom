@@ -137,17 +137,26 @@ function lockAndUnlock(event) {
   }
 }
 
-function savePalette(palette) {
-  savedColorPalette.push(palette)
-  console.log(savedColorPalette, palette);
-  return savedColorPalette;
+  function savePalette(palette) {
+    var savedPalette = { colors: [], id: palette.id };
+    for (let i = 0; i < palette.colors.length; i++) {
+      var color = {
+        hexCode: palette.colors[i].hexCode,
+        status: palette.colors[i].status,
+        id: palette.colors[i].id,
+      };
+      savedPalette.colors.push(color);
+    }
+    savedColorPalette.push(savedPalette);
+    console.log(savedColorPalette);
+    return savedColorPalette;
+  }
 }
 
 
 function displaySavedPalette(savedColorPalette, savedColorsContainer){
   savedColorsContainer.innerHTML = ""
-   for (var i = 0; i < savedColorPalette.length; i++){
-    console.log(savedColorPalette)
+   for (var i = 0; i < savedColorsContainer.color.length; i++){
    savedColorsContainer.innerHTML += `<div class="layer"> 
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
