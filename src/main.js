@@ -45,7 +45,7 @@ colorPaletteContainer.addEventListener("click", function (event) {
   displayCurrentColorPalette();
 });
 
-savePaletteButton.addEventListener("click", function() {
+savePaletteButton.addEventListener("click", function () {
   savePalette(currentColorPalette);
   displaySavedPalette(savedColorPalette, savedColorsContainer);
   setCurrentColors(currentColorPalette);
@@ -85,23 +85,23 @@ function setCurrentColors(
   // if (savedColorPalette.colors.length) {
   //   currentColorPalette = savedColorPalette;
   // } else {
-    if (currentColorPalette.colors.length === 0) {
-      for (let i = 0; i <= 4; i++) {
-        currentColorPalette.colors.push(createColor());
-      }
-    } else {
-      for (let i = 0; i < currentColorPalette.colors.length; i++) {
-        // console.log(currentColorPalette[i]);
-        if (currentColorPalette.colors[i].status === "unlocked") {
-          var newColor = createColor();
-          currentColorPalette.colors.splice(i, 1, newColor);
-        }
+  if (currentColorPalette.colors.length === 0) {
+    for (let i = 0; i <= 4; i++) {
+      currentColorPalette.colors.push(createColor());
+    }
+  } else {
+    for (let i = 0; i < currentColorPalette.colors.length; i++) {
+      // console.log(currentColorPalette[i]);
+      if (currentColorPalette.colors[i].status === "unlocked") {
+        var newColor = createColor();
+        currentColorPalette.colors.splice(i, 1, newColor);
       }
     }
-    return currentColorPalette;
   }
-  //   console.log(currentColorPalette);
-  
+  return currentColorPalette;
+}
+//   console.log(currentColorPalette);
+
 // }
 
 function displayCurrentColorPalette() {
@@ -137,27 +137,26 @@ function lockAndUnlock(event) {
   }
 }
 
-  function savePalette(palette) {
-    var savedPalette = { colors: [], id: palette.id };
-    for (let i = 0; i < palette.colors.length; i++) {
-      var color = {
-        hexCode: palette.colors[i].hexCode,
-        status: palette.colors[i].status,
-        id: palette.colors[i].id,
-      };
-      savedPalette.colors.push(color);
-    }
-    savedColorPalette.push(savedPalette);
-    console.log(savedColorPalette);
-    return savedColorPalette;
+function savePalette(palette) {
+  var savedPalette = { colors: [], id: palette.id };
+  for (let i = 0; i < palette.colors.length; i++) {
+    var color = {
+      hexCode: palette.colors[i].hexCode,
+      status: palette.colors[i].status,
+      id: palette.colors[i].id,
+    };
+    savedPalette.colors.push(color);
   }
+  savedColorPalette.push(savedPalette);
+  console.log(savedColorPalette);
+  return savedColorPalette;
 }
 
 
-function displaySavedPalette(savedColorPalette, savedColorsContainer){
+function displaySavedPalette(savedColorPalette, savedColorsContainer) {
   savedColorsContainer.innerHTML = ""
-   for (var i = 0; i < savedColorsContainer.color.length; i++){
-   savedColorsContainer.innerHTML += `<div class="layer"> 
+  for (var i = 0; i < savedColorPalette.length; i++) {
+    savedColorsContainer.innerHTML += `<div class="layer"> 
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
