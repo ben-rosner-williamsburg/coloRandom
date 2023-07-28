@@ -10,6 +10,8 @@ var savedColorsContainer = document.querySelector(".saved-colors-container");
 
 var savedPalettesMessage = document.querySelector(".saved-palettes-message");
 
+
+
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
@@ -48,6 +50,8 @@ savePaletteButton.addEventListener("click", function () {
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 })
+
+
 
 // ===== FUNCTIONS =====
 
