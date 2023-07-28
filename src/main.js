@@ -10,6 +10,8 @@ var savedColorsContainer = document.querySelector(".saved-colors-container");
 
 var savedPalettesMessage = document.querySelector(".saved-palettes-message");
 
+
+
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
@@ -43,6 +45,7 @@ savePaletteButton.addEventListener("click", function () {
   hideElement(savedPalettesMessage);
   savePalette(currentColorPalette);
   displaySavedPalette(savedColorPalette, savedColorsContainer);
+
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 });
@@ -52,6 +55,8 @@ savedColorsContainer.addEventListener("click", function (event) {
   displaySavedPalette(savedColorPalette, savedColorsContainer);
   displayCurrentColorPalette(currentColorPalette);
 });
+
+
 
 // ===== FUNCTIONS =====
 
@@ -141,6 +146,7 @@ function savePalette(palette) {
 function displaySavedPalette(savedColorPalette, savedColorsContainer) {
   savedColorsContainer.innerHTML = "";
   for (var i = 0; i < savedColorPalette.length; i++) {
+
     savedColorsContainer.innerHTML += `<div class="layer" > 
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
@@ -169,8 +175,3 @@ function hideElement(message) {
   message.classList.toggle("hidden", true);
 }
 
-
-function editSavedPalette(event) {
-  var editPalette = event.target;
-  console.log(editPalette);
-}
