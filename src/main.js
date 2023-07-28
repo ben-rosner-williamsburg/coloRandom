@@ -50,6 +50,7 @@ savePaletteButton.addEventListener("click", function () {
 savedColorsContainer.addEventListener("click", function (event) {
   deleteSavedPalette(event);
   displaySavedPalette(savedColorPalette, savedColorsContainer);
+  displayCurrentColorPalette(currentColorPalette);
 });
 
 // ===== FUNCTIONS =====
@@ -78,10 +79,7 @@ function createColor() {
   return color;
 }
 
-function setCurrentColors(
-  currentColorPalette
-  // savedColorPalette = { colors: [], id: Date.now() }
-) {
+function setCurrentColors(currentColorPalette, savedColorPalette) {
   // if (savedColorPalette.colors.length) {
   //   currentColorPalette = savedColorPalette;
   // } else {
@@ -99,7 +97,6 @@ function setCurrentColors(
   }
   currentColorPalette.id = Date.now();
 }
-
 // }
 
 function displayCurrentColorPalette() {
@@ -144,7 +141,7 @@ function savePalette(palette) {
 function displaySavedPalette(savedColorPalette, savedColorsContainer) {
   savedColorsContainer.innerHTML = "";
   for (var i = 0; i < savedColorPalette.length; i++) {
-    savedColorsContainer.innerHTML += `<div class="layer"> 
+    savedColorsContainer.innerHTML += `<div class="layer" > 
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
@@ -156,16 +153,24 @@ function displaySavedPalette(savedColorPalette, savedColorsContainer) {
 }
 
 function deleteSavedPalette(event) {
-  var deletePalette = event.target.id;
-  var index;
+  var deletePalette = event.target;
+  console.log(deletePalette);
   for (let i = 0; i < savedColorPalette.length; i++) {
-    if (savedColorPalette[i].id.toString() === deletePalette) {
-      index = i;
+    if (
+      savedColorPalette[i].id.toString() === deletePalette.id &&
+      deletePalette.classList.contains("delete")
+    ) {
+      savedColorPalette.splice(i, 1);
     }
   }
-  savedColorPalette.splice(index, 1);
 }
 
 function hideElement(message) {
   message.classList.toggle("hidden", true);
+}
+
+
+function editSavedPalette(event) {
+  var editPalette = event.target;
+  console.log(editPalette);
 }
