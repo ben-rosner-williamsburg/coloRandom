@@ -8,12 +8,8 @@ var savePaletteButton = document.querySelector(".save-palette");
 
 var savedColorsContainer = document.querySelector(".saved-colors-container");
 
-var savedPalettesContainer = document.querySelector(".saved-palettes-container");
+var savedPalettesMessage = document.querySelector(".saved-palettes-message");
 
-var layer = document.querySelector(".layer")
-
-
-console.log("saved Palettes Container", savedPalettesContainer);
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
@@ -21,18 +17,12 @@ var currentColorPalette = {
 };
 
 var savedColorPalette = []
-// TO DO - THINK ABOUT FUNCTION INSTEAD
-
-// var currentColorPalette = {
-//   colors: [
+// ===== ORIGINAL SPEC COLORS =====
 //     { hexCode: "#EA9999", status: "locked", id: 1690287923557 },
 //     { hexCode: "#FACB9C", status: "locked", id: 1690287923557 },
 //     { hexCode: "#FFE59A", status: "locked", id: 1690287923557 },
 //     { hexCode: "#B6D7A8", status: "locked", id: 1690287923557 },
 //     { hexCode: "#A4C4CA", status: "locked", id: 1690287923557 },
-//   ],
-//   id: Date.now(),
-// };
 
 // ===== EVENT LISTENERS =====
 window.addEventListener("load", function () {
@@ -51,6 +41,7 @@ colorPaletteContainer.addEventListener("click", function (event) {
 });
 
 savePaletteButton.addEventListener("click", function () {
+  hideElement(savedPalettesMessage);
   savePalette(currentColorPalette);
   displaySavedPalette(savedColorPalette, savedColorsContainer);
 
@@ -97,23 +88,19 @@ function setCurrentColors(
     }
   } else {
     for (let i = 0; i < currentColorPalette.colors.length; i++) {
-      // console.log(currentColorPalette[i]);
       if (currentColorPalette.colors[i].status === "unlocked") {
         var newColor = createColor();
         currentColorPalette.colors.splice(i, 1, newColor);
       }
     }
   }
-  return currentColorPalette.id = Date.now();
 }
-//   console.log(currentColorPalette);
 
 // }
 
 function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
-    // console.log(typeof currentColorPalette.colors[i].hexCode);
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
         <div class="color-box" id="${currentColorPalette.colors[i].id}" style="background-color: ${currentColorPalette.colors[i].hexCode}">
         <img id="${currentColorPalette.colors[i].id}"class="image"src='assets/${currentColorPalette.colors[i].status}.png'> </div>
@@ -124,22 +111,16 @@ function displayCurrentColorPalette() {
 
 function lockAndUnlock(event) {
   var lockEmoji = event.target.id;
-  //   console.log(lockEmoji);
-  // iterate through the array go to the data model and change the status of the specific one
   var index;
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
     if (currentColorPalette.colors[i].id === lockEmoji) {
-      //   console.log(i);
       index = i;
     }
   }
-  //   console.log(currentColorPalette.colors[index].status);
   if (currentColorPalette.colors[index].status === "locked") {
     currentColorPalette.colors[index].status = "unlocked";
-    // console.log("getting here");
   } else {
     currentColorPalette.colors[index].status = "locked";
-    // console.log("getting here2");
   }
 }
 
@@ -154,8 +135,6 @@ function savePalette(palette) {
     savedPalette.colors.push(color);
   }
   savedColorPalette.push(savedPalette);
-  console.log(savedColorPalette);
-  return savedColorPalette;
 }
 
 
@@ -174,15 +153,8 @@ function displaySavedPalette(savedColorPalette, savedColorsContainer) {
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[4].hexCode}"></div>
     </div>`;
   }
-};
-//   var deleteButton = document.querySelector(".delete-x-container");
+}
 
-//   deleteButton.addEventListener("click",function(event) {
-//     for ( var i  = 0; i < savedColorPalette.length; i++) {
-//       if (savedColorPalette[i].id === parseInt(event.target.closest('saved-color-box').id)) {
-//         savedColorPalette.splice(i, 1)
-//       }
-//       return savedColorPalette
-//     }
-//   })
-// };
+function hideElement(message){
+  message.classList.toggle("hidden", true);
+}
