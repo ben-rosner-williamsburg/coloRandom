@@ -7,8 +7,13 @@ var newPaletteButton = document.querySelector(".palette-button");
 var savePaletteButton = document.querySelector(".save-palette");
 
 var savedColorsContainer = document.querySelector(".saved-colors-container");
-console.log(savedColorsContainer);
-console.log(savePaletteButton);
+
+var savedPalettesContainer = document.querySelector(".saved-palettes-container");
+
+var layer = document.querySelector(".layer")
+
+
+console.log("saved Palettes Container", savedPalettesContainer);
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
@@ -48,6 +53,7 @@ colorPaletteContainer.addEventListener("click", function (event) {
 savePaletteButton.addEventListener("click", function () {
   savePalette(currentColorPalette);
   displaySavedPalette(savedColorPalette, savedColorsContainer);
+
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 })
@@ -98,7 +104,7 @@ function setCurrentColors(
       }
     }
   }
-  return currentColorPalette;
+  return currentColorPalette.id = Date.now();
 }
 //   console.log(currentColorPalette);
 
@@ -156,9 +162,10 @@ function savePalette(palette) {
 function displaySavedPalette(savedColorPalette, savedColorsContainer) {
   savedColorsContainer.innerHTML = ""
   for (var i = 0; i < savedColorPalette.length; i++) {
-    savedColorsContainer.innerHTML += `<div class="layer">
-   <div class="delete-x-container">
-     <img class="delete-x"src='assets/delete.png'>
+    savedColorsContainer.innerHTML += 
+`<div class="layer">
+   <div class="delete-x-container" id="delete-button">
+     <img class="delete-x" src='assets/delete.png'>
    </div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
@@ -167,4 +174,15 @@ function displaySavedPalette(savedColorPalette, savedColorsContainer) {
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[4].hexCode}"></div>
     </div>`;
   }
-}
+};
+//   var deleteButton = document.querySelector(".delete-x-container");
+
+//   deleteButton.addEventListener("click",function(event) {
+//     for ( var i  = 0; i < savedColorPalette.length; i++) {
+//       if (savedColorPalette[i].id === parseInt(event.target.closest('saved-color-box').id)) {
+//         savedColorPalette.splice(i, 1)
+//       }
+//       return savedColorPalette
+//     }
+//   })
+// };
