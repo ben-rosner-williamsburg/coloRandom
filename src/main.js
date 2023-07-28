@@ -15,10 +15,9 @@ var savedPalettesMessage = document.querySelector(".saved-palettes-message");
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
-  id: Date.now(),
 };
 
-var savedColorPalette = []
+var savedColorPalette = [];
 // ===== ORIGINAL SPEC COLORS =====
 //     { hexCode: "#EA9999", status: "locked", id: 1690287923557 },
 //     { hexCode: "#FACB9C", status: "locked", id: 1690287923557 },
@@ -49,7 +48,13 @@ savePaletteButton.addEventListener("click", function () {
 
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
-})
+});
+
+savedColorsContainer.addEventListener("click", function (event) {
+  deleteSavedPalette(event);
+  displaySavedPalette(savedColorPalette, savedColorsContainer);
+  displayCurrentColorPalette(currentColorPalette);
+});
 
 
 
@@ -79,10 +84,7 @@ function createColor() {
   return color;
 }
 
-function setCurrentColors(
-  currentColorPalette,
-  // savedColorPalette = { colors: [], id: Date.now() }
-) {
+function setCurrentColors(currentColorPalette, savedColorPalette) {
   // if (savedColorPalette.colors.length) {
   //   currentColorPalette = savedColorPalette;
   // } else {
@@ -98,8 +100,8 @@ function setCurrentColors(
       }
     }
   }
+  currentColorPalette.id = Date.now();
 }
-
 // }
 
 function displayCurrentColorPalette() {
@@ -141,24 +143,35 @@ function savePalette(palette) {
   savedColorPalette.push(savedPalette);
 }
 
-
 function displaySavedPalette(savedColorPalette, savedColorsContainer) {
-  savedColorsContainer.innerHTML = ""
+  savedColorsContainer.innerHTML = "";
   for (var i = 0; i < savedColorPalette.length; i++) {
-    savedColorsContainer.innerHTML += 
-`<div class="layer">
-   <div class="delete-x-container" id="delete-button">
-     <img class="delete-x" src='assets/delete.png'>
-   </div>
+
+    savedColorsContainer.innerHTML += `<div class="layer" > 
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[3].hexCode}"></div>
    <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[4].hexCode}"></div>
+   <img id="${savedColorPalette[i].id}"class="image delete"src='assets/delete.png'>
     </div>`;
   }
 }
 
-function hideElement(message){
+function deleteSavedPalette(event) {
+  var deletePalette = event.target;
+  console.log(deletePalette);
+  for (let i = 0; i < savedColorPalette.length; i++) {
+    if (
+      savedColorPalette[i].id.toString() === deletePalette.id &&
+      deletePalette.classList.contains("delete")
+    ) {
+      savedColorPalette.splice(i, 1);
+    }
+  }
+}
+
+function hideElement(message) {
   message.classList.toggle("hidden", true);
 }
+
