@@ -1,6 +1,5 @@
 * {
   background-color: #E7F1F1;
-
 }
 
 .full-page {
@@ -88,6 +87,15 @@
   margin: 5px;
 }
 
+.delete-x-container {
+  margin-top: 34px;
+}
+
+.delete-x {
+  width: 44px;
+  height: 44px;
+}
+
 .saved-palettes-container {
   display: flex;
   flex-direction: column;
@@ -112,7 +120,9 @@
 
 .layer {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
+
 }
 
 .saved-color-box {
