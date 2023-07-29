@@ -10,14 +10,12 @@ var savedColorsContainer = document.querySelector(".saved-colors-container");
 
 var savedPalettesMessage = document.querySelector(".saved-palettes-message");
 
-
-
 // ===== GLOBAL VARIABLES =====
 var currentColorPalette = {
   colors: [],
 };
 
-var savedColorPalette = [];
+var savedColorPalettes = [];
 // ===== ORIGINAL SPEC COLORS =====
 //     { hexCode: "#EA9999", status: "locked", id: 1690287923557 },
 //     { hexCode: "#FACB9C", status: "locked", id: 1690287923557 },
@@ -44,7 +42,7 @@ colorPaletteContainer.addEventListener("click", function (event) {
 savePaletteButton.addEventListener("click", function () {
   hideElement(savedPalettesMessage);
   savePalette(currentColorPalette);
-  displaySavedPalette(savedColorPalette, savedColorsContainer);
+  displaySavedPalette(savedColorPalettes, savedColorsContainer);
 
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
@@ -52,8 +50,13 @@ savePaletteButton.addEventListener("click", function () {
 
 savedColorsContainer.addEventListener("click", function (event) {
   deleteSavedPalette(event);
-  displaySavedPalette(savedColorPalette, savedColorsContainer);
+  displaySavedPalette(savedColorPalettes, savedColorsContainer);
   displayCurrentColorPalette(currentColorPalette);
+  if (event.target.classList.contains("layer" || "saved-color-box")) {
+    showSavedPalettes(event, savedColorPalettes, currentColorPalette)
+    setCurrentColors(savedColorPalettes);
+    displayCurrentColorPalette();
+  }
 });
 
 
@@ -84,7 +87,7 @@ function createColor() {
   return color;
 }
 
-function setCurrentColors(currentColorPalette, savedColorPalette) {
+function setCurrentColors(currentColorPalette) {
   // if (savedColorPalette.colors.length) {
   //   currentColorPalette = savedColorPalette;
   // } else {
@@ -104,7 +107,7 @@ function setCurrentColors(currentColorPalette, savedColorPalette) {
 }
 // }
 
-function displayCurrentColorPalette() {
+function displayCurrentColorPalette( ) {
   colorPaletteContainer.innerHTML = "";
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
@@ -140,20 +143,20 @@ function savePalette(palette) {
     };
     savedPalette.colors.push(color);
   }
-  savedColorPalette.push(savedPalette);
+  savedColorPalettes.push(savedPalette);
 }
 
-function displaySavedPalette(savedColorPalette, savedColorsContainer) {
+function displaySavedPalette(savedColorPalettes, savedColorsContainer) {
   savedColorsContainer.innerHTML = "";
-  for (var i = 0; i < savedColorPalette.length; i++) {
+  for (var i = 0; i < savedColorPalettes.length; i++) {
 
     savedColorsContainer.innerHTML += `<div class="layer" > 
-   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[0].hexCode}"></div>
-   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[1].hexCode}"></div>
-   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[2].hexCode}"></div>
-   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[3].hexCode}"></div>
-   <div class="saved-color-box" style="background-color: ${savedColorPalette[i].colors[4].hexCode}"></div>
-   <img id="${savedColorPalette[i].id}"class="image delete"src='assets/delete.png'>
+   <div class="saved-color-box" id=${savedColorPalettes[i].colors[0].id} style="background-color: ${savedColorPalettes[i].colors[0].hexCode}"></div>
+   <div class="saved-color-box" id=${savedColorPalettes[i].colors[1].id} style="background-color: ${savedColorPalettes[i].colors[1].hexCode}"></div>
+   <div class="saved-color-box" id=${savedColorPalettes[i].colors[2].id} style="background-color: ${savedColorPalettes[i].colors[2].hexCode}"></div>
+   <div class="saved-color-box" id=${savedColorPalettes[i].colors[3].id} style="background-color: ${savedColorPalettes[i].colors[3].hexCode}"></div>
+   <div class="saved-color-box" id=${savedColorPalettes[i].colors[4].id} style="background-color: ${savedColorPalettes[i].colors[4].hexCode}"></div>
+   <img id="${savedColorPalettes[i].id}"class="image delete"src='assets/delete.png'>
     </div>`;
   }
 }
@@ -161,12 +164,12 @@ function displaySavedPalette(savedColorPalette, savedColorsContainer) {
 function deleteSavedPalette(event) {
   var deletePalette = event.target;
   console.log(deletePalette);
-  for (let i = 0; i < savedColorPalette.length; i++) {
+  for (let i = 0; i < savedColorPalettes.length; i++) {
     if (
-      savedColorPalette[i].id.toString() === deletePalette.id &&
+      savedColorPalettes[i].id.toString() === deletePalette.id &&
       deletePalette.classList.contains("delete")
     ) {
-      savedColorPalette.splice(i, 1);
+      savedColorPalettes.splice(i, 1);
     }
   }
 }
@@ -174,4 +177,3 @@ function deleteSavedPalette(event) {
 function hideElement(message) {
   message.classList.toggle("hidden", true);
 }
-
