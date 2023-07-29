@@ -8,7 +8,7 @@ This is an app that displays palettes of colors generated randomly. Users can sa
 2. Enjoy playing around with color palettes!
 
 ### Preview of App:
-TBD
+[ColoRandom](ColoRandom_ScreenShot.png)
 
 ### Context:
 This is our Mod 1 Group Project for our time at Turing School for Software and Design. We had one week to work on it, and we were able to implement
