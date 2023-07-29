@@ -1,29 +1,21 @@
 // ===== ONLOAD QUERY SELECTORS =====
 
 var colorPaletteContainer = document.querySelector(".palette-container");
-
 var newPaletteButton = document.querySelector(".palette-button");
-
 var savePaletteButton = document.querySelector(".save-palette");
-
 var savedColorsContainer = document.querySelector(".saved-colors-container");
-
 var savedPalettesMessage = document.querySelector(".saved-palettes-message");
 
 // ===== GLOBAL VARIABLES =====
+
 var currentColorPalette = {
   colors: [],
 };
 
 var savedColorPalettes = [];
-// ===== ORIGINAL SPEC COLORS =====
-//     { hexCode: "#EA9999", status: "locked", id: 1690287923557 },
-//     { hexCode: "#FACB9C", status: "locked", id: 1690287923557 },
-//     { hexCode: "#FFE59A", status: "locked", id: 1690287923557 },
-//     { hexCode: "#B6D7A8", status: "locked", id: 1690287923557 },
-//     { hexCode: "#A4C4CA", status: "locked", id: 1690287923557 },
 
 // ===== EVENT LISTENERS =====
+
 window.addEventListener("load", function () {
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
@@ -43,7 +35,6 @@ savePaletteButton.addEventListener("click", function () {
   hideElement(savedPalettesMessage);
   savePalette(currentColorPalette);
   displaySavedPalette(savedColorPalettes, savedColorsContainer);
-
   setCurrentColors(currentColorPalette);
   displayCurrentColorPalette();
 });
@@ -52,21 +43,16 @@ savedColorsContainer.addEventListener("click", function (event) {
   deleteSavedPalette(event);
   displaySavedPalette(savedColorPalettes, savedColorsContainer);
   displayCurrentColorPalette(currentColorPalette);
-  if (event.target.classList.contains("layer" || "saved-color-box")) {
-    showSavedPalettes(event, savedColorPalettes, currentColorPalette)
-    setCurrentColors(savedColorPalettes);
-    displayCurrentColorPalette();
-  }
 });
 
 
 
-// ===== FUNCTIONS =====
+// ===== EVENT HANDLERS =====
 
 function randomHex() {
   var randIndex = Math.floor(Math.random() * hexCharacters.length);
   return hexCharacters[randIndex];
-}
+};
 
 function randomHexCode() {
   var randHexCode = "#";
@@ -75,7 +61,7 @@ function randomHexCode() {
     randHexCode += character;
   }
   return randHexCode;
-}
+};
 
 function createColor() {
   var colorCode = randomHexCode();
@@ -85,13 +71,10 @@ function createColor() {
     id: colorCode,
   };
   return color;
-}
+};
 
 function setCurrentColors(currentColorPalette) {
-  // if (savedColorPalette.colors.length) {
-  //   currentColorPalette = savedColorPalette;
-  // } else {
-  if (currentColorPalette.colors.length === 0) {
+  if (!currentColorPalette.colors.length) {
     for (let i = 0; i <= 4; i++) {
       currentColorPalette.colors.push(createColor());
     }
@@ -104,8 +87,7 @@ function setCurrentColors(currentColorPalette) {
     }
   }
   currentColorPalette.id = Date.now();
-}
-// }
+};
 
 function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
@@ -116,7 +98,7 @@ function displayCurrentColorPalette() {
         <div class="current-color-palette-text">${currentColorPalette.colors[i].hexCode}</div>
       </div>`;
   }
-}
+};
 
 function lockAndUnlock(event) {
   var lockEmoji = event.target.id;
@@ -131,7 +113,7 @@ function lockAndUnlock(event) {
   } else {
     currentColorPalette.colors[index].status = "locked";
   }
-}
+};
 
 function savePalette(palette) {
   var savedPalette = { colors: [], id: palette.id };
@@ -144,7 +126,7 @@ function savePalette(palette) {
     savedPalette.colors.push(color);
   }
   savedColorPalettes.push(savedPalette);
-}
+};
 
 function displaySavedPalette(savedColorPalettes, savedColorsContainer) {
   savedColorsContainer.innerHTML = "";
@@ -159,11 +141,10 @@ function displaySavedPalette(savedColorPalettes, savedColorsContainer) {
    <img id="${savedColorPalettes[i].id}"class="image delete"src='assets/delete.png'>
     </div>`;
   }
-}
+};
 
 function deleteSavedPalette(event) {
   var deletePalette = event.target;
-  console.log(deletePalette);
   for (let i = 0; i < savedColorPalettes.length; i++) {
     if (
       savedColorPalettes[i].id.toString() === deletePalette.id &&
@@ -172,8 +153,8 @@ function deleteSavedPalette(event) {
       savedColorPalettes.splice(i, 1);
     }
   }
-}
+};
 
 function hideElement(message) {
   message.classList.toggle("hidden", true);
-}
+};
