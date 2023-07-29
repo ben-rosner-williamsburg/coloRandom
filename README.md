@@ -25,5 +25,13 @@ all iterations except for the extensions.
 - Manipulate the page after it has loaded adding, removing, and updating elements on the DOM
 - Refine your collaboration skills
 
-### Wins and Challenges:
-TBD
+### Wins
+- We worked well together as a group and generally communicated effectively (Ben)
+- Learning how to use Flexbox (Zen)
+- Understanding how to delete an element when clicked in the data model and DOM (Zen)
+- Figuring out how to use the opacity property in CSS. (Ben)
+
+### Challenges
+- Although we generally communicated effectively, there is still room to grow (Ben)
+- Understanding code written by other teammates (Zen)
+- Figuring out event propagation when trying to manipulate elements in inner HTML. (Ben + Zen)

@@ -107,7 +107,7 @@ function setCurrentColors(currentColorPalette) {
 }
 // }
 
-function displayCurrentColorPalette( ) {
+function displayCurrentColorPalette() {
   colorPaletteContainer.innerHTML = "";
   for (let i = 0; i < currentColorPalette.colors.length; i++) {
     colorPaletteContainer.innerHTML += ` <div class = "color-container">
