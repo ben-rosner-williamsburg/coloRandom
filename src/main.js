@@ -145,7 +145,6 @@ function displaySavedPalette(savedColorPalettes, savedColorsContainer) {
 
 function deleteSavedPalette(event) {
   var deletePalette = event.target;
-  console.log(deletePalette);
   for (let i = 0; i < savedColorPalettes.length; i++) {
     if (
       savedColorPalettes[i].id.toString() === deletePalette.id &&
