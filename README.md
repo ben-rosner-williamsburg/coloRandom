@@ -30,8 +30,10 @@ all iterations except for the extensions.
 - Learning how to use Flexbox (Zen)
 - Understanding how to delete an element when clicked in the data model and DOM (Zen)
 - Figuring out how to use the opacity property in CSS. (Ben)
+- Learning to create a plan for an application that makes it flexible to accomodate later features (Logan).
 
 ### Challenges
-- Although we generally communicated effectively, there is still room to grow (Ben)
+- Although we generally communicated effectively, there is still room to grow (Ben + Logan)
 - Understanding code written by other teammates (Zen)
 - Figuring out event propagation when trying to manipulate elements in inner HTML. (Ben + Zen)
+- Understanding object behaviors in JS (e.g. assigning objects to variables assigns a reference to an object rather than a copy). (Logan)
